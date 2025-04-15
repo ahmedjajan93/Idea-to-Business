@@ -20,7 +20,7 @@ st.markdown("Turn your startup idea into a full plan using AI.")
 def load_model():
     try:
         llm = ChatOpenAI(
-            model="deepseek/deepseek-chat:free",
+            model="openai/gpt-3.5-turbo:free",
             openai_api_base="https://openrouter.ai/api/v1",
             temperature=0.7,
         )
