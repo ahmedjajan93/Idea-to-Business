@@ -106,15 +106,22 @@ arab_countries = st.selectbox(
 if st.button("📊 Generate Blueprint"):
     if idea_input:
         with st.spinner("Thinking like a founder..."):
-            response = chain.run(
-                {
+            try:
+                # Run LangChain and capture the response
+                response = chain.run({
                     "idea": idea_input,
                     "language": language,
-                    "arab_countries": arab_countries,
-                }
-            )
-            st.write(response)
-        st.markdown("### 📘 Business Blueprint")
-        st.success(response.strip())
+                    "arab_countries": arab_countries
+                })
+                
+                # Check if response is None
+                if response is None:
+                    st.error("The model returned no response. Please try again later.")
+                else:
+                    st.markdown("### 📘 Business Blueprint")
+                    st.success(response.strip())
+            except Exception as e:
+                # Catch any errors and display them
+                st.error(f"An error occurred: {str(e)}")
     else:
         st.warning("Please describe your idea first.")
