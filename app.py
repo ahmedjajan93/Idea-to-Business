@@ -18,12 +18,16 @@ st.markdown("Turn your startup idea into a full plan using AI.")
 # Initialize ChatOpenAI LLM
 @st.cache_resource
 def load_model():
-    llm = ChatOpenAI(
-        model="deepseek/deepseek-chat:free",
-        openai_api_base="https://openrouter.ai/api/v1",
-        temperature=0.7,  # Balance creativity vs. consistency (0=strict, 1=creative)
-    )
-    return llm
+    try:
+        llm = ChatOpenAI(
+            model="mistralai/mistral-small-3.1-24b-instruct:free",
+            openai_api_base="https://openrouter.ai/api/v1",
+            temperature=0.7,
+        )
+        return llm
+    except Exception as e:
+        st.error(f"Failed to load model: {str(e)}")
+        return None  # Return None if there's an error during loading
 
 
 llm = load_model()
