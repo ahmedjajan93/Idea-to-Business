@@ -19,7 +19,7 @@ st.markdown("Turn your startup idea into a full plan using AI.")
 @st.cache_resource
 def load_model():
     llm = ChatOpenAI(
-        model="mistralai/mistral-small-3.1-24b-instruct:free",
+        model="deepseek/deepseek-chat:free",
         openai_api_base="https://openrouter.ai/api/v1",
         temperature=0.7,  # Balance creativity vs. consistency (0=strict, 1=creative)
     )
